@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+</h:head>
+<f:view>
+	<h:form prependId="false">
+
+		<p:commandButton value="Register"
+			action="#{productoController.guardar}" ajax="false" />
+
+		<p:dataTable var="data" value="#{productoController.listaProductos}">
+			<p:column headerText="Nombre">
+				<h:outputText value="#{data.nombre}" />
+			</p:column>
+			<p:column headerText="Precio">
+				<h:outputText value="#{data.precio}" />
+			</p:column>
+			<p:column headerText="Categoria">
+				<h:outputText value="#{data.categoria.nombre}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</f:view>
+</html>
