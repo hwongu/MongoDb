@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 
  * @author Henry Joe Wong Urquiza
- * @mail hwongu@gmail.com
+ * @mail hwongu@hwongu.net
  */
 @Document
 public class Producto implements Serializable {
@@ -19,6 +20,7 @@ public class Producto implements Serializable {
 	private BigInteger id;
 	private String nombre;
 	private Double precio;
+	@DBRef
 	private Categoria categoria;
 
 	public Producto() {

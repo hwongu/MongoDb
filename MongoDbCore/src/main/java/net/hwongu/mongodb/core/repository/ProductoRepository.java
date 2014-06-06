@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Las clases tienen que tener el formato de XxxxxRepository para que Spring data lo reconozca
  * @author Henry Joe Wong Urquiza
- * @mail hwongu@gmail.com
+ * @mail hwongu@hwongu.net
  */
 @Repository
 public interface ProductoRepository extends

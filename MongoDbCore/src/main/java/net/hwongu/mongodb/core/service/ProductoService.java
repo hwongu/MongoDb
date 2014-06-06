@@ -6,7 +6,7 @@ import net.hwongu.mongodb.core.service.base.BaseService;
 /**
  * 
  * @author Henry Joe Wong Urquiza
- * @mail hwongu@gmail.com
+ * @mail hwongu@hwongu.net
  */
 
 public interface ProductoService extends BaseService<ProductoRepository> {
