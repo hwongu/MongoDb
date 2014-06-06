@@ -28,7 +28,8 @@ import com.google.common.collect.Lists;
 
 /**
  * 
- * @author HWONGU
+ * @author Henry Joe Wong Urquiza
+ * @mail hwongu@hwongu.net
  */
 @ManagedBean
 @SessionScoped
