@@ -4,15 +4,35 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<script name="jquery/jquery.js" library="primefaces"></script>
+
 </h:head>
 <f:view>
 	<h:form prependId="false">
-
-		<p:commandButton value="Register"
-			action="#{productoController.guardar}" ajax="false" />
-
-		<p:dataTable var="data" value="#{productoController.listaProductos}">
+		<h2>Mantenimiento Producto</h2>
+		<h:panelGrid columns="2">
+			<h:outputText value="Nombre:" />
+			<p:inputText value="#{productoController.producto.nombre}"></p:inputText>
+			
+			<h:outputText value="Precio:" />
+			<p:inputText value="#{productoController.producto.precio}"></p:inputText>
+			
+			<h:outputText value="Categoria:" />
+			<p:selectOneMenu  value="#{productoController.idCategoria}">
+            	<f:selectItems value="#{productoController.itemsCategorias}" />
+        	</p:selectOneMenu>
+		</h:panelGrid>
+		<h:panelGrid columns="2">
+			<p:commandButton value="Registrar" action="#{productoController.guardar}" ajax="false" />
+			<p:commandButton value="Eliminar" action="#{productoController.eliminar}" ajax="false" />
+		</h:panelGrid>
+		<p:dataTable var="data" 
+			value="#{productoController.listaProductos}" 
+			id="dtProductos"
+			rowKey="#{data.id}" 
+			selection="#{productoController.productoSeleccionado}"
+			emptyMessage="No existe productos registros" 
+			selectionMode="single">
+			
 			<p:column headerText="Nombre">
 				<h:outputText value="#{data.nombre}" />
 			</p:column>
@@ -23,6 +43,8 @@
 				<h:outputText value="#{data.categoria.nombre}" />
 			</p:column>
 		</p:dataTable>
+		
+		<p:growl id="growl" showDetail="true" sticky="true" /> 
 	</h:form>
 </f:view>
 </html>
