@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package net.hwongu.mongodb.web.controller;
 
 import java.io.Serializable;
@@ -41,9 +35,9 @@ public class ProductoController implements Serializable {
 	private List<Producto> listaProductos;
 	private List<SelectItem> itemsCategorias;
 	private BigInteger idCategoria;
-	@ManagedProperty(value="#{productoService}")
+	@ManagedProperty(value = "#{productoService}")
 	private ProductoService productoService;
-	@ManagedProperty(value="#{categoriaService}")
+	@ManagedProperty(value = "#{categoriaService}")
 	private CategoriaService categoriaService;
 
 	public ProductoController() {
@@ -55,31 +49,34 @@ public class ProductoController implements Serializable {
 	}
 
 	@PostConstruct
-	public void postConstructor(){
+	public void postConstructor() {
 		this.listarCategorias();
 		this.listarProductos();
 	}
-	
+
 	private void listarProductos() {
 		try {
 			this.listaProductos = new ArrayList<Producto>();
-			this.listaProductos = Lists.newArrayList(this.productoService.getRepository().findAll());			
+			this.listaProductos = Lists.newArrayList(this.productoService
+					.getRepository().findAll());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void listarCategorias() {
-		List<Categoria> listaCategorias = Lists.newArrayList(this.categoriaService.getRepository().findAll());
+		List<Categoria> listaCategorias = Lists
+				.newArrayList(this.categoriaService.getRepository().findAll());
 		this.itemsCategorias = new ArrayList<SelectItem>();
-		for(Categoria c : listaCategorias){
+		for (Categoria c : listaCategorias) {
 			this.itemsCategorias.add(new SelectItem(c.getId(), c.getNombre()));
 		}
 	}
 
 	public void guardar() {
 		try {
-			this.producto.setCategoria(categoriaService.getRepository().findOne(this.idCategoria));
+			this.producto.setCategoria(categoriaService.getRepository()
+					.findOne(this.idCategoria));
 			this.productoService.getRepository().save(this.producto);
 			this.producto = new Producto();
 			this.listarProductos();
@@ -88,20 +85,18 @@ public class ProductoController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public void eliminar(){
-		try{
-			this.productoService.getRepository().delete(this.productoSeleccionado);
+
+	public void eliminar() {
+		try {
+			this.productoService.getRepository().delete(
+					this.productoSeleccionado);
 			this.listarProductos();
 			this.productoSeleccionado = new Producto();
 			this.enviarMensaje("Se elimino satisfactoriamente");
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	
 
 	public List<Producto> getListaProductos() {
 		return listaProductos;
@@ -122,47 +117,47 @@ public class ProductoController implements Serializable {
 	public BigInteger getIdCategoria() {
 		return idCategoria;
 	}
-	
+
 	public void setIdCategoria(BigInteger idCategoria) {
 		this.idCategoria = idCategoria;
 	}
-	
+
 	public List<SelectItem> getItemsCategorias() {
 		return itemsCategorias;
 	}
-	
+
 	public void setItemsCategorias(List<SelectItem> itemsCategorias) {
 		this.itemsCategorias = itemsCategorias;
 	}
-	
+
 	public CategoriaService getCategoriaService() {
 		return categoriaService;
 	}
-	
+
 	public void setCategoriaService(CategoriaService categoriaService) {
 		this.categoriaService = categoriaService;
 	}
-	
+
 	public ProductoService getProductoService() {
 		return productoService;
 	}
-	
+
 	public void setProductoService(ProductoService productoService) {
 		this.productoService = productoService;
 	}
-	
+
 	public Producto getProductoSeleccionado() {
 		return productoSeleccionado;
 	}
-	
+
 	public void setProductoSeleccionado(Producto productoSeleccionado) {
 		this.productoSeleccionado = productoSeleccionado;
 	}
-	
-	public void enviarMensaje(String mensaje) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Información",  mensaje) );
 
-    }
+	public void enviarMensaje(String mensaje) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("Información", mensaje));
+
+	}
 
 }
